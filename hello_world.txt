@@ -1,0 +1,17 @@
+function FindProxyForURL(url, host) {
+  // List of domains to be proxied
+  var proxyDomains = [
+    "facebook.com",
+    "wikipedia.org",
+    "ifconfig.me"
+  ];
+
+  for (var i = 0; i < proxyDomains.length; i++) {
+    if (dnsDomainIs(host, proxyDomains[i]) || shExpMatch(host, "*." + proxyDomains[i])) {
+      return "SOCKS5 127.0.0.1:5005";
+    }
+  }
+
+  // Default to direct connection
+  return "DIRECT";
+}
